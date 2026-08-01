@@ -1,0 +1,18 @@
+import java.util.Scanner;
+
+public class LibraryFine {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter days late: ");
+        int days = sc.nextInt();
+
+        if (days > 0) {
+            System.out.println("Fine = ₹" + (days * 5));
+        } else {
+            System.out.println("No fine");
+        }
+
+        sc.close();
+    }
+}

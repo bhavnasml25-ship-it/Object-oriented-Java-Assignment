@@ -1,0 +1,136 @@
+//Question1 
+class Solution {
+    public int myAtoi(String s) {
+        int i = 0;
+        int n = s.length();
+
+        while (i < n && s.charAt(i) == ' ')
+            i++;
+
+        int sign = 1;
+
+        if (i < n && s.charAt(i) == '-') {
+            sign = -1;
+            i++;
+        } else if (i < n && s.charAt(i) == '+') {
+            i++;
+        }
+
+        long num = 0;
+
+        while (i < n && Character.isDigit(s.charAt(i))) {
+            num = num * 10 + (s.charAt(i) - '0');
+
+            if (sign == 1 && num > 2147483647)
+                return 2147483647;
+
+            if (sign == -1 && -num < -2147483648L)
+                return -2147483648;
+
+            i++;
+        }
+
+        return (int)(sign * num);
+    }
+}
+
+//Question 2
+import java.util.*;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int T = sc.nextInt();
+
+        while (T-- > 0) {
+            int X = sc.nextInt();
+            String s = sc.next();
+
+            int carlsen = 0;
+            int chef = 0;
+
+            for (int i = 0; i < 14; i++) {
+                if (s.charAt(i) == 'C') {
+                    carlsen += 2;
+                } else if (s.charAt(i) == 'N') {
+                    chef += 2;
+                } else {
+                    carlsen += 1;
+                    chef += 1;
+                }
+            }
+
+            if (carlsen >= chef) {
+                if (carlsen == chef)
+                    System.out.println(55 * X);
+                else
+                    System.out.println(60 * X);
+            } else {
+                System.out.println(40 * X);
+            }
+        }
+
+        sc.close();
+    }
+}
+
+//Question 3
+class Solution {
+    public void findLargestOddSubstring(String num) {
+        for (int i = num.length() - 1; i >= 0; i--) {
+            char c = num.charAt(i);
+
+            if (c == '1' || c == '3' || c == '5' ||
+                c == '7' || c == '9') {
+                System.out.println(num.substring(0, i + 1));
+                return;
+            }
+        }
+
+        System.out.println("-1");
+    }
+}
+
+//Question 4
+
+import java.util.*;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int T = sc.nextInt();
+        sc.nextLine();
+
+        while (T-- > 0) {
+            String s = sc.nextLine();
+            String[] words = s.split(" ");
+
+            for (int i = 0; i < words.length; i++) {
+                String word = words[i];
+
+                boolean acronym = true;
+
+                for (int j = 0; j < word.length(); j++) {
+                    if (Character.isLowerCase(word.charAt(j))) {
+                        acronym = false;
+                        break;
+                    }
+                }
+
+                if (!acronym) {
+                    word = word.toLowerCase();
+                    word = Character.toUpperCase(word.charAt(0))
+                            + word.substring(1);
+                }
+
+                words[i] = word;
+            }
+
+            System.out.println(String.join(" ", words));
+        }
+
+        sc.close();
+    }
+}
